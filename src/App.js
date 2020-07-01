@@ -25,7 +25,28 @@ class App extends Component {
     //console.log('Was clicked!');
   }
 
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        {name: 'Britany', age: 23},
+        {name: 'Anna', age: 24},
+        {name: event.target.value, age: 30},
+      ],
+    } )
+  }
+
   render() {
+    const style ={
+      backgroundColor: 'black',
+      font: 'inherit',
+      border: '1px solid yellow',
+      borderRadius: '5px',
+      padding: '8px',
+      color: '#fff',
+      marginTop: '16px',
+      curser: 'pointer'
+    };
+
     return (
       <div className="App">
         <header className="App-header">
@@ -34,7 +55,9 @@ class App extends Component {
         </header>
 
      {/*    This way of passing references is less efficient */}
-        <button onClick={() => this.switchNameHandler('Amy')}>Switch Name</button> 
+        <button 
+        style={style}
+        onClick={() => this.switchNameHandler('Amy')}>Switch Name</button> 
        
         <Person 
         name={this.state.persons[0].name} 
@@ -45,7 +68,8 @@ class App extends Component {
         age={this.state.persons[1].age}>My hobby is sewing</Person>
         <Person 
         name={this.state.persons[2].name} 
-        age={this.state.persons[2].age}/>
+        age={this.state.persons[2].age}
+        changed={this.nameChangedHandler}/>
       </div>
     );
   }
