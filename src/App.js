@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import Pattern from './Patterns/Pattern';
+import Welcome from './Welcome/Welcome';
 
 class App extends Component {
   state = {
@@ -10,7 +12,19 @@ class App extends Component {
       {name: 'Anna', age: 24},
       {name: 'Laura', age: 31},
     ],
-    otherState: 'other value'
+    login: [
+      {title: 'Guest'}
+    ],
+    bookInfo: [
+      {titleBook: 'Home made Gifts in Variety', 
+        volume: 'Needlecraft Volume VII Number 4',
+        published: 'December 1915 Augusta, Maine:  NeedleCraft Publishing',
+        item:'Tatted calling-card case' },
+        {titleBook: 'Tatting', 
+        volume: 'Needlecraft Volume 1',
+        published: 'December 1920 Augusta, Maine:  NeedleCraft Publishing',
+        item:'Flower' }
+    ]
   }
 
   switchNameHandler = (newName) => {
@@ -35,6 +49,14 @@ class App extends Component {
     } )
   }
 
+  loginHandler = (event) => {
+    this.setState({
+      login: [
+        {title: event.target.value}
+      ]
+    })
+  }
+
   render() {
     const style ={
       backgroundColor: 'black',
@@ -50,10 +72,29 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">First React App</h1>
+          <h1 className="App-title">Retro Patterns</h1>
+          
         </header>
 
+        <Welcome
+        loginName = {this.loginHandler}
+        name={this.state.login[0].title}
+        ></Welcome>
+
+        <Pattern
+                titleBook={this.state.bookInfo[0].titleBook}
+                volume={this.state.bookInfo[0].volume}
+                published={this.state.bookInfo[0].published}
+                item={this.state.bookInfo[0].item}
+
+/>
+<Pattern
+                titleBook={this.state.bookInfo[1].titleBook}
+                volume={this.state.bookInfo[1].volume}
+                published={this.state.bookInfo[1].published}
+                item={this.state.bookInfo[1].item}
+
+/>
      {/*    This way of passing references is less efficient */}
         <button 
         style={style}
